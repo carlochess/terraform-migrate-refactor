@@ -209,8 +209,12 @@ resource "aws_api_gateway_deployment" "api" {
 
 # Remote state
 
+## Remote backend + Remote lock
+
 # Split into folders (aka. modules)
 
 # Move between modules
 
 # Move between workspaces
+
+# Terraform Import
