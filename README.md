@@ -205,6 +205,10 @@ resource "aws_api_gateway_deployment" "api" {
 
 # Split into files
 
+# State file (breif summary)
+
+# Remote state
+
 # Split into folders (aka. modules)
 
 # Move between modules
