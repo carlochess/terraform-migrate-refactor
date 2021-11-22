@@ -16,7 +16,7 @@ resource "aws_lambda_function" "example_lambda" {
   function_name = "example_lambda"
   handler = "example_lambda.handler"
   role = "${aws_iam_role.example_lambda.arn}"
-  runtime = "nodejs16.10"
+  runtime = "nodejs14.x"
 
   filename = "${data.archive_file.example_lambda.output_path}"
   source_code_hash = "${data.archive_file.example_lambda.output_base64sha256}"
@@ -68,20 +68,20 @@ data "aws_iam_policy_document" "example_lambda" {
   statement {
     sid       = "AllowInvokingLambdas"
     effect    = "Allow"
-    resources = ["arn:aws:lambda:ap-southeast-1:*:function:*"]
+    resources = ["arn:aws:lambda:${var.region}:*:function:*"]
     actions   = ["lambda:InvokeFunction"]
   }
 
   statement {
     sid       = "AllowCreatingLogGroups"
     effect    = "Allow"
-    resources = ["arn:aws:logs:ap-southeast-1:*:*"]
+    resources = ["arn:aws:logs:${var.region}:*:*"]
     actions   = ["logs:CreateLogGroup"]
   }
   statement {
     sid       = "AllowWritingLogs"
     effect    = "Allow"
-    resources = ["arn:aws:logs:ap-southeast-1:*:log-group:/aws/lambda/*:*"]
+    resources = ["arn:aws:logs:${var.region}:*:log-group:/aws/lambda/*:*"]
 
     actions = [
       "logs:CreateLogStream",
