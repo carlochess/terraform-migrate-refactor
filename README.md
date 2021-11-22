@@ -2,6 +2,8 @@
 This contain some tips and tricks arount Terraform migration best practices and refactor code. Do it when you feel conftable.
 
 # Why we would need to use this?
+Some reasons
+
 - Third party module refactor
 - Our own code refactor
 - Terraform identifier
@@ -10,17 +12,19 @@ This contain some tips and tricks arount Terraform migration best practices and 
 Remember: we are modifying code wrote in Terraform and its state. You don't need this if you can destroy your infra resources or you don't have a terraform state created yet.
 
 # Aliases
+Some aliases
 ```
 alias tfi="terraform init"
 alias tfp="terraform plan -out plan"
 ```
 # Safety measures
-
+Some safety measures
 - Plan what you are doing
 - Always have a backup: s3 object versioning, dynamo backups, old plain `cp`
 - Use another state backend key
 
 # Project architecture
+Diagram of the project architecture
 
 ![Project architecture](images/Charla.jpg)
 
