@@ -2,6 +2,7 @@
 This contain some tips and tricks arount Terraform migration best practices and refactor code. Do it when you feel conftable.
 
 # Why we would need to use this?
+
 Some reasons
 
 - Third party module refactor

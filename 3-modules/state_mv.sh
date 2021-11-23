@@ -31,7 +31,7 @@ EOF
 
 tfi
 tfp
-export STATE=charla
+export STATE=charla3
 export TF_S3_BUCKET=charla-tf-state
 export TF_DYNAMO_TABLE=charla-tf-state
 
@@ -54,11 +54,6 @@ done
 # updateDynamo $STATE $TF_S3_BUCKET $TF_DYNAMO_TABLE
 # aws s3 cp ${STATE}.tfstate s3://$TF_S3_BUCKET/${STATE}.tfstate
 
-# terr
-./.terraform/terraform.tfstate
-# terraform state push
-
-tfi
 tfp
 terraform refresh
 

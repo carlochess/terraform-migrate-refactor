@@ -45,17 +45,6 @@ resource "aws_api_gateway_usage_plan" "main" {
     api_id = aws_api_gateway_rest_api.api.id
     stage  = aws_api_gateway_stage.main.stage_name
   }
-
-  quota_settings {
-    limit  = 1
-    offset = 0
-    period = "DAY"
-  }
-
-  throttle_settings {
-    burst_limit = 1
-    rate_limit  = 1
-  }
 }
 
 resource "aws_api_gateway_api_key" "mykey" {

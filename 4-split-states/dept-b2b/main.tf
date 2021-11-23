@@ -6,7 +6,7 @@
 # }
 
 data "aws_api_gateway_rest_api" "api" {
-  api_id = "my-sqs-api"
+  name = "my-sqs-api"
 }
 
 locals {
@@ -21,9 +21,9 @@ module "apigatewayresource" {
   name     = "${local.channel}"
 }
 
-output "test_cURL" {
-  value = <<EOF
-API_KEY=$(aws ssm get-parameter --name "/api/api_key" --with-decryption --query "Parameter.Value")
-curl -X POST -H 'Content-Type: application/json' -H "X-API-KEY: $API_KEY"  -d '{"id":"test", "docs":[{"key":"value"}]}' ${data.aws_api_gateway_stage.main.invoke_url}/${local.channel}
-EOF
-}
+# output "test_cURL" {
+#   value = <<EOF
+# API_KEY=$(aws ssm get-parameter --name "/api/api_key" --with-decryption --query "Parameter.Value")
+# curl -X POST -H 'Content-Type: application/json' -H "X-API-KEY: $API_KEY"  -d '{"id":"test", "docs":[{"key":"value"}]}' ${data.aws_api_gateway_stage.main.invoke_url}/${local.channel}
+# EOF
+# }
