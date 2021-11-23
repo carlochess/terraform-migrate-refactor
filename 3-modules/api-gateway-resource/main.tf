@@ -119,7 +119,7 @@ resource "aws_api_gateway_resource" "api" {
 resource "aws_api_gateway_method" "api" {
   rest_api_id          = "${var.api_id}"
   resource_id          = "${aws_api_gateway_resource.api.id}"
-  api_key_required     = false
+  api_key_required     = true
   http_method          = "POST"
   authorization        = "NONE"
   request_validator_id = "${aws_api_gateway_request_validator.api.id}"

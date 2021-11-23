@@ -1,1 +1,11 @@
-../2-remote-state/remote.tf
+terraform {
+  required_version = ">= 0.12"
+
+  backend "s3" {
+    key            = "charla3.tfstate"
+    bucket         = "charla-tf-state"
+    region         = "us-east-1"
+    profile        = "charla"
+    dynamodb_table = "charla-tf-state"
+  }
+}

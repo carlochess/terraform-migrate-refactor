@@ -129,12 +129,12 @@ resource "aws_api_gateway_method" "api" {
   for_each                  = local.channels
   rest_api_id          = "${aws_api_gateway_rest_api.api.id}"
   resource_id          = "${aws_api_gateway_resource.api[each.key].id}"
-  api_key_required     = false
+  api_key_required     = true
   http_method          = "POST"
   authorization        = "NONE"
   request_validator_id = "${aws_api_gateway_request_validator.api[each.key].id}"
-  request_parameters   = {}
-  authorization_scopes = []
+  # request_parameters   = {}
+  # authorization_scopes = []
 
 
   request_models = {
@@ -150,7 +150,7 @@ resource "aws_api_gateway_integration" "api" {
   type                    = "AWS"
   integration_http_method = "POST"
   passthrough_behavior    = "NEVER"
-  cache_key_parameters    = []
+  # cache_key_parameters    = []
   credentials             = "${aws_iam_role.api[each.key].arn}"
   uri                     = "arn:aws:apigateway:${var.region}:sqs:path/${aws_sqs_queue.queue[each.key].name}"
 
@@ -172,7 +172,7 @@ resource "aws_api_gateway_integration_response" "two" {
   http_method       = "${aws_api_gateway_method.api[each.key].http_method}"
   status_code       = "${aws_api_gateway_method_response.two[each.key].status_code}"
   selection_pattern = "^2[0-9][0-9]"                                       // regex pattern for any 200 message that comes back from SQS
-  response_parameters = {}
+  # response_parameters = {}
 
   response_templates = {
     "application/json" = "{\"message\": \"great success!\"}"
@@ -187,7 +187,7 @@ resource "aws_api_gateway_method_response" "two" {
   resource_id = "${aws_api_gateway_resource.api[each.key].id}"
   http_method = "${aws_api_gateway_method.api[each.key].http_method}"
   status_code = 200
-  response_parameters = {}
+  # response_parameters = {}
 
   response_models = {
     "application/json" = "Empty"
