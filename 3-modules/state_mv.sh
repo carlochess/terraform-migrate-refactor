@@ -1,7 +1,7 @@
 function updateDynamo(){
     export STATE=$1
     export TF_S3_BUCKET=$2
-    export TF_DYNAMO_TABLE=$2
+    export TF_DYNAMO_TABLE=$3
     cat <<EOF > key.json
     {
         "LockID": {"S": "${TF_S3_BUCKET}/${STATE}.tfstate-md5"}
