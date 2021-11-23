@@ -12,21 +12,16 @@ node {
         sh """#!/bin/bash
             set -x
             export PATH="\$HOME/.tfenv/bin:\$PATH"
-            export plugin_dir=/tmp/
-            export TF_PLUGIN_CACHE_DIR="\$plugin_dir/.terraform.d/plugin-cache"
-            mkdir -p \$TF_PLUGIN_CACHE_DIR
             function tfip(){
                 local workspace=\$1
                 local i=\$2
                 local tf_workspace=\$3
-                local plugin_dir=/tmp/
-                local TF_PLUGIN_CACHE_DIR="\$plugin_dir/.terraform.d/plugin-cache"
                 echo "" | tee -a \${workspace}/summary.txt
                 echo "\$i \${tf_workspace}" | tee -a \${workspace}/summary.txt
                 if [ ! -z "\$tf_workspace" ]; then
                   terraform workspace select \$tf_workspace
                 else
-                  terraform init -input=false -upgrade
+                  terraform init -input=false
                   exit_code=\$?
                   if [ \$exit_code -ne 0 ] ; then
                     echo "Failed init"| tee -a \${workspace}/summary.txt
