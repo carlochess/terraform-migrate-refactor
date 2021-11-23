@@ -1,5 +1,5 @@
 # Terraform migrate and refactor tutorial
-This contain some tips and tricks arount Terraform migration best practices and refactor code. Do it when you feel conftable.
+This contain some tips and tricks around Terraform migration best practices and refactor code. Do it when you feel comfortable.
 
 # Why we would need to use this?
 

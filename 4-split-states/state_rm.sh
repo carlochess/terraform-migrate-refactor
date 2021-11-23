@@ -16,7 +16,7 @@ EOF
  
     cat <<EOF > expression-attribute-values.json
     {
-        ":y":{"S": "$(md5 -r ${STATE}.tfstate | awk '{print $1}')"}
+        ":y":{"S": "$(md5sum ${STATE}.tfstate | awk '{print $1}')"}
     }
 EOF
 # md5 -r terraform.tfstate in mac
@@ -29,12 +29,14 @@ EOF
 }
 
 export STATE=charla4
-# export SUB=b2b
-# export STATE="charla4${SUB}"
+folder="$(basename "$PWD")"
+if [[ "$folder" != "common" ]]; then
+    export SUB="$(echo "$folder" | sed 's/dept-//')"
+    export STATE="charla4${SUB}"
+fi
+echo $STATE
 export TF_S3_BUCKET=charla-tf-state
 export TF_DYNAMO_TABLE=charla-tf-state
-
-aws s3 cp s3://${TF_S3_BUCKET}/${STATE}.tfstate terraform.tfstate
 
 tfi
 tfp

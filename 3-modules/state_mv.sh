@@ -16,7 +16,7 @@ EOF
  
     cat <<EOF > expression-attribute-values.json
     {
-        ":y":{"S": "$(md5 -r ${STATE}.tfstate | awk '{print $1}')"}
+        ":y":{"S": "$(md5sum ${STATE}.tfstate | awk '{print $1}')"}
     }
 EOF
 # md5 -r terraform.tfstate in mac
